@@ -2,4 +2,5 @@
 from importlib.metadata import version
 __version__ = version("pysorting")
 
+from pysorting.bubble import bubble_sort
 from pysorting.quicksort import quick_sort

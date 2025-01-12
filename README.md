@@ -47,7 +47,7 @@ This utility is handy for debugging and ensuring the correctness of sorting impl
 The package was created with the goal to be a tool for aspiring computer and data scientists to use in order to better understand the steps, similiraities and differences of various sorting functions. With the current functions included, a user can easily pass an array and implement a sorting function of his choosing to return the sorted array. Further developments for this package will include a function to generate a random list of desired size for sorting, one function to compute the big-o complexity of a given sorting algortithm, and a visualization of the sorting process for a chosen algorithm.
 
 
-## pysorting in the python ecosystem
+## `pysorting` in the Python Ecosystem
 There are many presences of similar sorting functions within the python ecosystem. For one, python itself already has a built in [`.sort()` function](https://docs.python.org/3/library/stdtypes.html#list.sort). There is also a [`sorted()` built-in function](https://docs.python.org/3/library/functions.html#sorted) that builds a new sorted list from an iterable.Additionally, several packages have also been created with similar goal of implementing various sorting algortithms. One example project is shown here: [https://pypi.org/project/sort-algorithms/](https://github.com/DahlitzFlorian/SortingAlgorithms)
 Our package aims to distinguish itself from other packages through its easy access to auxiliary tools making it easy to implement various sorting algorithm, and importantly to highlight differences between them.  
 

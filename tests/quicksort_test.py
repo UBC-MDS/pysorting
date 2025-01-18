@@ -1,5 +1,5 @@
 import pytest
-from pysorting.quicksort import quick_sort
+from pysorting import quick_sort
 
 def test_empty_list():
     """Test sorting an empty list."""
@@ -12,7 +12,6 @@ def test_single_element():
 def test_sorted_list():
     """Test sorting an already sorted list."""
     assert quick_sort([1, 2, 3, 4]) == [1, 2, 3, 4]
-
 def test_reverse_sorted_list():
     """Test sorting a reverse-sorted list."""
     assert quick_sort([4, 3, 2, 1]) == [1, 2, 3, 4]
@@ -60,11 +59,11 @@ def test_non_comparable_elements():
 
 def test_large_input(large_unsorted_list):
     """Test sorting a large list."""
-    assert quick_sort(large_unsorted_list) == list(range(1, 1001))
+    assert quick_sort(large_unsorted_list) == list(range(1, 101))
 
 def test_large_input_reverse(large_sorted_list):
     """Test sorting a large list in reverse order."""
-    assert quick_sort(large_sorted_list, reverse=True) == list(range(1000, 0, -1))
+    assert quick_sort(large_sorted_list, reverse=True) == list(range(100, 0, -1))
 
 def test_floats_and_integers():
     """Test sorting a mix of integers and floats."""

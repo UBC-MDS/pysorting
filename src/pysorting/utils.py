@@ -80,3 +80,22 @@ def is_sorted(lst, ascending=True):
         return all(lst[i] <= lst[i + 1] for i in range(len(lst) - 1))
     else:
         return all(lst[i] >= lst[i + 1] for i in range(len(lst) - 1))
+
+
+def validate_list_elements(elements):
+    """
+    Validates if all elements in a list are either all numerical (int or float)
+    or all strings.
+
+    Parameters:
+    - elements (list): List of elements to validate.
+
+    Returns:
+    - bool: True if the list is valid, False otherwise.
+    """
+    if all(isinstance(e, (int, float)) for e in elements):
+        return True  # All elements are numerical
+    elif all(isinstance(e, str) for e in elements):
+        return True  # All elements are strings
+    else:
+        return False

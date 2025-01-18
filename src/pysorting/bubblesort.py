@@ -4,65 +4,25 @@ that sorts a list of data by comparing adjacent elements and swapping them if th
 """
 
 # import numpy as np
+from .utils import validate_list_elements
 
 
-def bubble_sort(arr):
-    """
-    Sorts a list of numbers in ascending order using the Bubble Sort algorithm.
+class InvalidElementTypeError(Exception):
+    """Custom exception raised when elements are not strings or lists of strings."""
 
-    Parameters
-    ----------
-    arr : list
-        A list of numeric values to be sorted.
+    def __init__(
+        self, message="All elements must be either a string or a list of strings."
+    ):
+        self.message = message
+        super().__init__(self.message)
 
-    Returns
-    -------
-    list
-        A sorted list in ascending order.
 
-    Raises
-    ------
-    TypeError
-        If the input is not a list.
-    ValueError
-        If the list contains non-numeric elements.
+class NonUniformTypeError(Exception):
+    """Custom exception raised when elements are not strings or lists of strings."""
 
-    Examples
-    --------
-    >>> bubble_sort([4, 2, 7, 1, 3])
-    [1, 2, 3, 4, 7]
-
-    >>> bubble_sort([10, -3, 0, 5, 9])
-    [-3, 0, 5, 9, 10]
-    """
-    try:
-        # Validate input type
-        # if not isinstance(arr, (list,np.ndarray)):
-        if not isinstance(arr, list):
-            raise TypeError("Input must be a list.")
-
-        # Validate list elements
-        if not all(isinstance(x, (int, float, str)) for x in arr):
-            raise ValueError("All elements in the list must be numeric or be a string.")
-
-        n = len(arr)
-        for i in range(n):
-            swapped = False
-            for j in range(0, n - i - 1):
-                if arr[j] > arr[j + 1]:
-                    arr[j], arr[j + 1] = arr[j + 1], arr[j]  # Swap elements
-                    swapped = True
-            if not swapped:
-                break
-        print("Done sorting the array")
-        return arr
-
-    except TypeError as te:
-        raise (f"Some or all of the values in the list are not accepted")
-    except ValueError as ve:
-        print(f"ValueError: {ve}")
-    except Exception as e:
-        print(f"An unexpected error occurred: {e}")
+    def __init__(self, message="Elements are not of the same type."):
+        self.message = message
+        super().__init__(self.message)
 
 
 def bubble_sort(arr, ascending=True):
@@ -96,14 +56,17 @@ def bubble_sort(arr, ascending=True):
     >>> bubble_sort([10, -3, 0, 5, 9], order="descending")
     [10, 9, 5, 0, -3]
     """
+    if not all(isinstance(x, (int, float, str)) for x in arr):
+        raise InvalidElementTypeError()
+
+    if not validate_list_elements(arr):
+        raise NonUniformTypeError()
     try:
         # Validate input type
-        if not isinstance(arr, list):
-            raise TypeError("Input must be a list.")
+        # if not isinstance(arr, list):
+        #     raise TypeError("Input must be a list.")
 
-        # Validate list elements
-        if not all(isinstance(x, (int, float, str)) for x in arr):
-            raise ValueError("All elements in the list must be numeric or a string.")
+        # # Validate list elements
 
         # Sorting logic
         n = len(arr)
@@ -122,8 +85,6 @@ def bubble_sort(arr, ascending=True):
         return arr
 
     except TypeError as te:
-        raise TypeError(te)
-    except ValueError as ve:
-        raise ValueError(ve)
+        raise TypeError("Your data should all be of the same type")
     except Exception as e:
         raise Exception(f"An unexpected error occurred: {e}")

@@ -1,31 +1,42 @@
 import pytest
 
 
+# pytest --cov-branch  --cov=src/pysorting/
 @pytest.fixture
-def text_data1():
+def test_data1():
     return [5, 3, 8, 6, 2, 7, 4, 1]
 
 
 @pytest.fixture
-def text_data_single_element():
+def test_data_single_element():
     return [5]
 
 
 @pytest.fixture
-def text_data_sorted():
+def test_data_sorted():
     return [1, 2, 3, 4, 5, 6, 7, 8]
 
 
 @pytest.fixture
-def text_data_empty():
+def test_data_empty():
     return []
 
 
 @pytest.fixture
-def text_data_error():
+def test_data_error():
     return [3, "apple", 7, None]
 
 
 @pytest.fixture
-def text_data_error2():
+def test_data_error2():
     return "hello"
+
+
+@pytest.fixture
+def test_invalid_error():
+    return [3, "apple", 7, []]
+
+
+@pytest.fixture
+def test_nonuniform_error():
+    return [3, "apple", 7]

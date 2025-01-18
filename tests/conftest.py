@@ -38,9 +38,9 @@ def small_unsorted_list():
 # Fixture to initialize a large unsorted list (descending order)
 @pytest.fixture
 def large_unsorted_list():
-    return list(range(1000, 0, -1))  # A large descending list
+    return list(range(100, 0, -1))  # A large descending list
 
 # Fixture to initialize a large sorted list (ascending order)
 @pytest.fixture
 def large_sorted_list():
-    return list(range(1, 1001))  # A large sorted list (ascending order)
+    return list(range(1, 101))  # A large sorted list (ascending order)

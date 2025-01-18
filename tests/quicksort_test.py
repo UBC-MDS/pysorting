@@ -52,3 +52,27 @@ def test_invalid_reverse_param():
     """Test passing an invalid reverse parameter."""
     with pytest.raises(TypeError, match="'reverse' must be a boolean value."):
         quick_sort([1, 2, 3], reverse="yes")
+
+def test_non_comparable_elements():
+    """Test sorting a list with non-comparable elements."""
+    with pytest.raises(ValueError, match="All elements in the list must be comparable."):
+        quick_sort([1, "a", 3])
+
+def test_large_input():
+    """Test sorting a large list."""
+    large_list = list(range(1000, 0, -1))  # Descending order
+    assert quick_sort(large_list) == list(range(1, 1001))
+
+def test_large_input_reverse():
+    """Test sorting a large list in reverse order."""
+    large_list = list(range(1, 1001))  # Ascending order
+    assert quick_sort(large_list, reverse=True) == list(range(1000, 0, -1))
+
+def test_floats_and_integers():
+    """Test sorting a mix of integers and floats."""
+    assert quick_sort([1.1, 2, 0.5, 3]) == [0.5, 1.1, 2, 3]
+    assert quick_sort([1.1, 2, 0.5, 3], reverse=True) == [3, 2, 1.1, 0.5]
+
+def test_boolean_values():
+    """Test sorting a list with boolean values."""
+    assert quick_sort([True, False, True, False]) == [False, False, True, True]

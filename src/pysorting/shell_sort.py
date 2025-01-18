@@ -30,14 +30,18 @@ def shell_sort(arr: list[float]) -> list[float]:
     Returns:
         list[float]: The sorted array.
     """
-    pass
+    # Implementation of shell sort algorithm
+    gap = len(arr) // 2
 
+    while gap > 0:
+        for i in range(gap, len(arr)):
+            temp = arr[i]
+            j = i
+            while j >= gap and arr[j - gap] > temp:
+                arr[j] = arr[j - gap]
+                j -= gap
+            arr[j] = temp
+        gap //= 2
 
-def get_user_input() -> list[float]:
-    """
-    Gets a list of numbers from the user.
-
-    Returns:
-        list[float]: A list of numbers entered by the user.
-    """
+    return arr  # Make sure to return the sorted array
     pass

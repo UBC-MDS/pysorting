@@ -1,5 +1,5 @@
 import pytest
-from pysorting import quick_sort
+from pysorting.quicksort import quick_sort
 
 def test_empty_list():
     """Test sorting an empty list."""

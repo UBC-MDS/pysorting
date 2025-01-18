@@ -17,9 +17,9 @@ def test_reverse_sorted_list():
     """Test sorting a reverse-sorted list."""
     assert quick_sort([4, 3, 2, 1]) == [1, 2, 3, 4]
 
-def test_unsorted_list():
+def test_unsorted_list(small_unsorted_list):
     """Test sorting an unsorted list."""
-    assert quick_sort([3, 1, 4, 2]) == [1, 2, 3, 4]
+    assert quick_sort(small_unsorted_list) == [1, 2, 3, 4]
 
 def test_duplicates():
     """Test sorting a list with duplicate elements."""
@@ -58,15 +58,13 @@ def test_non_comparable_elements():
     with pytest.raises(ValueError, match="All elements in the list must be comparable."):
         quick_sort([1, "a", 3])
 
-def test_large_input():
+def test_large_input(large_unsorted_list):
     """Test sorting a large list."""
-    large_list = list(range(1000, 0, -1))  # Descending order
-    assert quick_sort(large_list) == list(range(1, 1001))
+    assert quick_sort(large_unsorted_list) == list(range(1, 1001))
 
-def test_large_input_reverse():
+def test_large_input_reverse(large_sorted_list):
     """Test sorting a large list in reverse order."""
-    large_list = list(range(1, 1001))  # Ascending order
-    assert quick_sort(large_list, reverse=True) == list(range(1000, 0, -1))
+    assert quick_sort(large_sorted_list, reverse=True) == list(range(1000, 0, -1))
 
 def test_floats_and_integers():
     """Test sorting a mix of integers and floats."""

@@ -62,7 +62,7 @@ def quick_sort(arr, reverse=False):
             _ = arr[i] < arr[i + 1]  # Check if elements are comparable
         except TypeError:
             raise ValueError("All elements in the list must be comparable.")
-    try:
+        
         pivot = arr[0]
         if reverse:  # Sort in descending order
             left = [x for x in arr[1:] if x > pivot]
@@ -73,5 +73,3 @@ def quick_sort(arr, reverse=False):
 
         # Recursively sort left and right partitions
         return quick_sort(left, reverse) + [pivot] + quick_sort(right, reverse)
-    except Exception as e:
-        raise Exception(f"An unexpected error occurred during sorting: {e}")

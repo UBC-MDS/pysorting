@@ -44,3 +44,7 @@ def large_unsorted_list():
 @pytest.fixture
 def large_sorted_list():
     return list(range(1, 101))  # A large sorted list (ascending order)
+
+@pytest.fixture
+def test_data_float():
+    return [5, 3.0, 2, 4, 1]

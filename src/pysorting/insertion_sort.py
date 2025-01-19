@@ -2,7 +2,10 @@
 # author: Marek Boulerice
 # date: 2024-01-10
 
-def insertion_sort(unsorted[float]):
+from typing import List,Any
+
+
+def insertion_sort(unsorted:List[Any], ascending = True):
     """
     Performs insertion sorting algorithm on given list and returns new sorted list.
 
@@ -32,4 +35,27 @@ def insertion_sort(unsorted[float]):
     insertion_sort([0.1, 0, 12, 0, 100.01])
     [0, 0, 0.1, 12, 100.01]
     """
-    pass
+    #check that input value is of correct type:
+    if not isinstance(unsorted, list):
+        raise TypeError("Input value not a list")
+
+    #check that all values in list are numeric
+    if not all(isinstance(i, (int,float)) for i in unsorted):
+        raise TypeError("All elements in input must be numeric")
+
+
+
+    # perform sorting algorthm
+    n = len(unsorted)
+    for i in range(1,n):
+        key = unsorted[i]
+        j = i-1
+        while j >= 0 and key < unsorted[j]:
+            unsorted[j+1] = unsorted[j]
+            unsorted[j] = key
+            j -= 1
+
+    if ascending == False:
+        unsorted.reverse()
+
+    return unsorted

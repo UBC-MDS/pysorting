@@ -14,5 +14,4 @@ from pysorting.insertion_sort import insertion_sort
 
 from pysorting.utils import find_fastest_sorting_function, sorting_time, is_sorted
 
-
 __version__ = version("pysorting")

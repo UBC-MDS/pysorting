@@ -46,4 +46,30 @@ def quick_sort(arr, reverse=False):
     >>> quick_sort(arr, reverse=True)
     [7, 4, 3, 2, 1]
     """
-    pass
+    # Validate input type
+    if not isinstance(arr, list):
+        raise TypeError("Input must be a list.")
+    if not isinstance(reverse, bool):
+        raise TypeError("'reverse' must be a boolean value.")
+    
+    # If the array is empty or has one element, it's already sorted
+    if len(arr) <= 1:
+        return arr
+    
+    # Validate that all elements in the list are comparable
+    for i in range(len(arr) - 1):
+        try:
+            _ = arr[i] < arr[i + 1]  # Check if elements are comparable
+        except TypeError:
+            raise ValueError("All elements in the list must be comparable.")
+        
+        pivot = arr[0]
+        if reverse:  # Sort in descending order
+            left = [x for x in arr[1:] if x > pivot]
+            right = [x for x in arr[1:] if x <= pivot]
+        else:  # Sort in ascending order
+            left = [x for x in arr[1:] if x < pivot]
+            right = [x for x in arr[1:] if x >= pivot]
+
+        # Recursively sort left and right partitions
+        return quick_sort(left, reverse) + [pivot] + quick_sort(right, reverse)

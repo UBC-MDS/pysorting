@@ -1,9 +1,6 @@
-"""
-Quicksort Algorithm Implementation.
-This module provides an implementation of the Quicksort algorithm, a popular 
+""" This module provides an implementation of the Quicksort algorithm, a popular 
 sorting technique.
-Author: Shashank
-Date: 10 Jan, 2025
+@author: Shashank
 """
 def quick_sort(arr, reverse=False):
     """

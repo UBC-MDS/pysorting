@@ -2,27 +2,36 @@
 sorting technique.
 @author: Shashank
 """
-def quick_sort(arr, reverse=False):
+def quick_sort(arr, ascending=False):
     """
-    Sorts an array using the Quicksort algorithm.
+    Sorts a list of numbers in ascending or descending order using the Quick Sort algorithm.
 
     Quicksort is a divide-and-conquer algorithm that selects a "pivot" element 
     and partitions the array into two sub-arrays: one with elements smaller than 
     the pivot and one with elements greater than the pivot. It recursively sorts 
     the sub-arrays and combines them into a sorted array. The sorting order can 
-    be controlled with the `reverse` parameter.
+    be controlled with the ascending parameter.
 
     Parameters:
     ----------
     arr : list
-        The list of elements to be sorted. This can contain any comparable types.
-    reverse : bool, optional
-        If `True`, sorts the array in descending order. If `False` (default), sorts the array in ascending order.
+        The list of numeric values to be sorted.
+    ascending : bool, optional
+        If `True` (default), sorts the list in ascending order. If `False`, sorts the list in descending order.
 
     Returns:
     -------
     list
         The sorted array in ascending order if `reverse=False`, or in descending order if `reverse=True`.
+
+    Raises:
+    ------
+    TypeError
+        If the input is not a list.
+    InvalidElementTypeError
+        If the list contains non-comparable elements.
+    NonUniformTypeError
+        If the list contains more than one form of data type.
 
     Notes:
     -----
@@ -34,13 +43,11 @@ def quick_sort(arr, reverse=False):
     Examples:
     --------
     Sorting in ascending order (default):
-    >>> arr = [4, 2, 7, 1, 3]
-    >>> quick_sort(arr)
+    >>> quick_sort([4, 2, 7, 1, 3])
     [1, 2, 3, 4, 7]
 
     Sorting in descending order:
-    >>> arr = [4, 2, 7, 1, 3]
-    >>> quick_sort(arr, reverse=True)
+    >>> quick_sort([4, 2, 7, 1, 3], reverse=True)
     [7, 4, 3, 2, 1]
     """
     # Validate input type

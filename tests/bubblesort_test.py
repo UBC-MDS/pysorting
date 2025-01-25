@@ -1,5 +1,8 @@
 import pytest
-from pysorting import bubble_sort, InvalidElementTypeError, NonUniformTypeError
+from pysorting import (bubble_sort, 
+                       InvalidElementTypeError, 
+                       NonUniformTypeError, 
+                       InvalidAscendingTypeError)
 
 
 def test_sorted_list(test_data_sorted):
@@ -64,3 +67,9 @@ def test_non_uniform_error(test_nonuniform_error):
     """Test if a TypeError is raised for non-list inputs."""
     with pytest.raises(NonUniformTypeError):
         bubble_sort(test_nonuniform_error)
+
+
+def test_invalid_ascending_type():
+    """Test if InvalidAscendingTypeError is raised when ascending parameter is not a boolean."""
+    with pytest.raises(InvalidAscendingTypeError):
+        bubble_sort([1, 2, 3], ascending="not_a_boolean")

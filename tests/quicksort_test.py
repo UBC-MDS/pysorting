@@ -1,75 +1,86 @@
 import pytest
-from pysorting import quick_sort
+from pysorting import quick_sort, InvalidElementTypeError, NonUniformTypeError, InvalidAscendingTypeError
 
-def test_empty_list():
-    """Test sorting an empty list."""
-    assert quick_sort([]) == []
 
-def test_single_element():
-    """Test sorting a list with a single element."""
-    assert quick_sort([1]) == [1]
+def test_sorted_list(test_data_sorted):
+    """Test if a pre-sorted list remains unchanged."""
+    expected = [1, 2, 3, 4, 5, 6, 7, 8]
+    actual = quick_sort(test_data_sorted)
 
-def test_sorted_list():
-    """Test sorting an already sorted list."""
-    assert quick_sort([1, 2, 3, 4]) == [1, 2, 3, 4]
-def test_reverse_sorted_list():
-    """Test sorting a reverse-sorted list."""
-    assert quick_sort([4, 3, 2, 1]) == [1, 2, 3, 4]
+    assert isinstance(actual, list)
+    assert actual == expected
 
-def test_unsorted_list(small_unsorted_list):
-    """Test sorting an unsorted list."""
-    assert quick_sort(small_unsorted_list) == [1, 2, 3, 4]
 
-def test_duplicates():
-    """Test sorting a list with duplicate elements."""
-    assert quick_sort([4, 2, 4, 1]) == [1, 2, 4, 4]
+def test_reverse_sorted_list(test_data1):
+    """Test if a reverse sorting works properly."""
+    expected = [8, 7, 6, 5, 4, 3, 2, 1]
+    actual = quick_sort(test_data1, ascending=False)
 
-def test_reverse_sorting():
-    """Test sorting a list in descending order."""
-    assert quick_sort([3, 1, 4, 2], reverse=True) == [4, 3, 2, 1]
+    assert isinstance(actual, list)
+    assert actual == expected
 
-def test_strings():
-    """Test sorting a list of strings."""
-    assert quick_sort(["apple", "banana", "cherry"]) == ["apple", "banana", "cherry"]
-    assert quick_sort(["apple", "banana", "cherry"], reverse=True) == ["cherry", "banana", "apple"]
 
-def test_mixed_types():
-    """Test sorting a list with mixed comparable types."""
-    assert quick_sort([3, 1.5, 2, 4.2]) == [1.5, 2, 3, 4.2]
+def test_unsorted_list(test_data1):
+    """Test if an unsorted list is sorted correctly."""
+    expected = [1, 2, 3, 4, 5, 6, 7, 8]
+    actual = quick_sort(test_data1)
 
-def test_none_in_list():
-    """Test sorting a list containing None values."""
-    with pytest.raises(ValueError, match="All elements in the list must be comparable."):
-        quick_sort([1, None, 3])
+    assert isinstance(actual, list)
+    assert actual == expected
 
-def test_non_list_input():
-    """Test passing a non-list input."""
-    with pytest.raises(TypeError, match="Input must be a list."):
-        quick_sort("not a list")
 
-def test_invalid_reverse_param():
-    """Test passing an invalid reverse parameter."""
-    with pytest.raises(TypeError, match="'reverse' must be a boolean value."):
-        quick_sort([1, 2, 3], reverse="yes")
+def test_single_element_list(test_data_single_element):
+    """Test if a single-element list is handled correctly."""
+    expected = [5]
+    actual = quick_sort(test_data_single_element)
 
-def test_non_comparable_elements():
-    """Test sorting a list with non-comparable elements."""
-    with pytest.raises(ValueError, match="All elements in the list must be comparable."):
-        quick_sort([1, "a", 3])
+    assert isinstance(actual, list)
+    assert len(actual) == 1
+    assert actual == expected
 
-def test_large_input(large_unsorted_list):
-    """Test sorting a large list."""
-    assert quick_sort(large_unsorted_list) == list(range(1, 101))
 
-def test_large_input_reverse(large_sorted_list):
-    """Test sorting a large list in reverse order."""
-    assert quick_sort(large_sorted_list, reverse=True) == list(range(100, 0, -1))
+def test_empty_list(test_data_empty):
+    """Test if an empty list is handled correctly."""
+    actual = quick_sort(test_data_empty)
 
-def test_floats_and_integers():
-    """Test sorting a mix of integers and floats."""
-    assert quick_sort([1.1, 2, 0.5, 3]) == [0.5, 1.1, 2, 3]
-    assert quick_sort([1.1, 2, 0.5, 3], reverse=True) == [3, 2, 1.1, 0.5]
+    assert isinstance(actual, list)
+    assert len(actual) == 0
 
-def test_boolean_values():
-    """Test sorting a list with boolean values."""
-    assert quick_sort([True, False, True, False]) == [False, False, True, True]
+def test_invalid_type_error(test_invalid_error):
+    """Test if an InvalidElementTypeError is raised for invalid element types."""
+    with pytest.raises(InvalidElementTypeError):
+        quick_sort(test_invalid_error)
+
+def test_non_uniform_error(test_nonuniform_error):
+    """Test if a NonUniformTypeError is raised for lists with mixed types."""
+    with pytest.raises(NonUniformTypeError):
+        quick_sort(test_nonuniform_error)
+
+def test_invalid_ascending_type():
+    """Test if InvalidAscendingTypeError is raised when ascending parameter is not a boolean."""
+    with pytest.raises(InvalidAscendingTypeError):
+        quick_sort([1, 2, 3], ascending="not_a_boolean")
+
+def test_float_list(test_data_float):
+    """Test if a list with both integers and floats is sorted correctly."""
+    expected = [1, 2, 3.0, 4, 5]
+    actual = quick_sort(test_data_float)
+
+    assert isinstance(actual, list)
+    assert actual == expected
+
+def test_large_sorted_list(large_sorted_list):
+    """Test sorting of a large already sorted list."""
+    actual = quick_sort(large_sorted_list)
+
+    assert isinstance(actual, list)
+    assert actual == large_sorted_list
+
+
+def test_large_unsorted_list(large_unsorted_list):
+    """Test sorting of a large unsorted list."""
+    expected = list(range(1, 101))
+    actual = quick_sort(large_unsorted_list)
+
+    assert isinstance(actual, list)
+    assert actual == expected

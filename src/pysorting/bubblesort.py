@@ -4,8 +4,10 @@ that sorts a list of data by comparing adjacent elements and swapping them if th
 """
 
 # import numpy as np
-from .utils import validate_list_elements, InvalidElementTypeError, NonUniformTypeError
-
+from .utils import (validate_list_elements, 
+                    InvalidElementTypeError, 
+                    NonUniformTypeError, 
+                    InvalidAscendingTypeError)
 
 def bubble_sort(arr, ascending=True):
     """
@@ -56,6 +58,10 @@ def bubble_sort(arr, ascending=True):
 
     if not validate_list_elements(arr):
         raise NonUniformTypeError()
+    
+    if not isinstance(ascending, bool):
+        raise InvalidAscendingTypeError()
+    
     try:
         # Validate input type
         # if not isinstance(arr, list):

@@ -17,6 +17,14 @@ class NonUniformTypeError(Exception):
     def __init__(self, message="Elements are not of the same type."):
         self.message = message
         super().__init__(self.message)
+    
+
+class InvalidAscendingTypeError(Exception):
+    """Custom exception raised when 'ascending' is not a boolean."""
+
+    def __init__(self, message="The parameter 'ascending' must be a boolean value."):
+        self.message = message
+        super().__init__(self.message)
 
 
 def timer(func):

@@ -2,7 +2,12 @@
 sorting technique.
 @author: Shashank
 """
-def quick_sort(arr, ascending=False):
+from .utils import (validate_list_elements, 
+                    InvalidElementTypeError, 
+                    NonUniformTypeError, 
+                    InvalidAscendingTypeError)
+
+def quick_sort(arr, ascending=True):
     """
     Sorts a list of numbers in ascending or descending order using the Quick Sort algorithm.
 
@@ -51,29 +56,26 @@ def quick_sort(arr, ascending=False):
     [7, 4, 3, 2, 1]
     """
     # Validate input type
-    if not isinstance(arr, list):
-        raise TypeError("Input must be a list.")
-    if not isinstance(reverse, bool):
-        raise TypeError("'reverse' must be a boolean value.")
+    if not all(isinstance(x, (int, float, str)) for x in arr):
+        raise InvalidElementTypeError()
+    
+    if not validate_list_elements(arr):
+        raise NonUniformTypeError()
+    
+    if not isinstance(ascending, bool):
+        raise InvalidAscendingTypeError()
     
     # If the array is empty or has one element, it's already sorted
     if len(arr) <= 1:
         return arr
     
-    # Validate that all elements in the list are comparable
-    for i in range(len(arr) - 1):
-        try:
-            _ = arr[i] < arr[i + 1]  # Check if elements are comparable
-        except TypeError:
-            raise ValueError("All elements in the list must be comparable.")
-        
-        pivot = arr[0]
-        if reverse:  # Sort in descending order
-            left = [x for x in arr[1:] if x > pivot]
-            right = [x for x in arr[1:] if x <= pivot]
-        else:  # Sort in ascending order
-            left = [x for x in arr[1:] if x < pivot]
-            right = [x for x in arr[1:] if x >= pivot]
+    pivot = arr[0]
+    if not ascending:  # Sort in descending order
+        left = [x for x in arr[1:] if x > pivot]
+        right = [x for x in arr[1:] if x <= pivot]
+    else:  # Sort in ascending order
+        left = [x for x in arr[1:] if x < pivot]
+        right = [x for x in arr[1:] if x >= pivot]
 
-        # Recursively sort left and right partitions
-        return quick_sort(left, reverse) + [pivot] + quick_sort(right, reverse)
+    # Recursively sort left and right partitions
+    return quick_sort(left, ascending) + [pivot] + quick_sort(right, ascending)

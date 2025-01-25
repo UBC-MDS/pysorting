@@ -4,57 +4,52 @@ that sorts a list of data by comparing adjacent elements and swapping them if th
 """
 
 # import numpy as np
-from .utils import validate_list_elements
-
-
-class InvalidElementTypeError(Exception):
-    """Custom exception raised when elements are not strings or lists of strings."""
-
-    def __init__(
-        self, message="All elements must be either a string or a list of strings."
-    ):
-        self.message = message
-        super().__init__(self.message)
-
-
-class NonUniformTypeError(Exception):
-    """Custom exception raised when elements are not strings or lists of strings."""
-
-    def __init__(self, message="Elements are not of the same type."):
-        self.message = message
-        super().__init__(self.message)
+from .utils import validate_list_elements, InvalidElementTypeError, NonUniformTypeError
 
 
 def bubble_sort(arr, ascending=True):
     """
     Sorts a list of numbers in ascending or descending order using the Bubble Sort algorithm.
 
-    Parameters
+    Bubble Sort repeatedly compares adjacent elements in the list and swaps them if they are in the wrong order.
+    This process is repeated until the list is fully sorted. The sorting order can be controlled using the `ascending` parameter.
+
+    Parameters:
     ----------
     arr : list
-        A list of numeric values to be sorted.
+        The list of numeric values to be sorted.
     ascending : bool, optional
-        The order of sorting: True for "ascending" (default) or False for "descending".
+        If `True` (default), sorts the list in ascending order. If `False`, sorts the list in descending order.
 
-    Returns
+    Returns:
     -------
     list
-        A sorted list in the specified order.
+        The sorted list in ascending order if `ascending=True`, or in descending order if `ascending=False`.
 
-    Raises
+    Raises:
     ------
     TypeError
         If the input is not a list.
-    ValueError
-        If the list contains non-numeric elements or an invalid order is specified.
+    InvalidElementTypeError
+        If the list contains non-numeric elementsor string values.
+    NonUniformTypeError
+        If the list contains more than one form of data type
 
-    Examples
+    Notes:
+    -----
+    - Bubble Sort is a simple sorting algorithm with a time complexity of O(n^2) for average and worst cases.
+    - This algorithm is inefficient for large datasets but can be used for educational purposes or small lists.
+    - Sorting in descending order is achieved by reversing the comparison logic during the sorting process.
+
+    Examples:
     --------
+    Sorting in ascending order (default):
     >>> bubble_sort([4, 2, 7, 1, 3])
     [1, 2, 3, 4, 7]
 
-    >>> bubble_sort([10, -3, 0, 5, 9], order="descending")
-    [10, 9, 5, 0, -3]
+    Sorting in descending order:
+    >>> bubble_sort([4, 2, 7, 1, 3], ascending=False)
+    [7, 4, 3, 2, 1]
     """
     if not all(isinstance(x, (int, float, str)) for x in arr):
         raise InvalidElementTypeError()

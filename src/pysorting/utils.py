@@ -1,6 +1,24 @@
 import time
 
 
+class InvalidElementTypeError(Exception):
+    """Custom exception raised when elements are not strings or lists of strings."""
+
+    def __init__(
+        self, message="All elements must be either a string or a list of strings."
+    ):
+        self.message = message
+        super().__init__(self.message)
+
+
+class NonUniformTypeError(Exception):
+    """Custom exception raised when elements are not strings or lists of strings."""
+
+    def __init__(self, message="Elements are not of the same type."):
+        self.message = message
+        super().__init__(self.message)
+
+
 def timer(func):
     """This function is used as a wrapper to time sorting function. It prints the time
 

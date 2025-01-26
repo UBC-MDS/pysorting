@@ -5,7 +5,7 @@ __version__ = version("pysorting")
 from pysorting.bubblesort import bubble_sort
 from pysorting.quicksort import quick_sort
 from pysorting.shell_sort import shell_sort
-from pysorting.insertion_sort import insertion_sort
+from pysorting.insertionsort import insertion_sort
 
 from pysorting.utils import (
     InvalidElementTypeError,

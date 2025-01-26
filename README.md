@@ -72,7 +72,7 @@ Interested in contributing? Check out the [contributing guidelines](https://gith
 
 ## License
 
-`pysorting` was created by Group 27. It is licensed under the terms of the MIT license.
+`pysorting` was created by Nonso, Marek, Siddarth, Shashank. It is licensed under the terms of the MIT license.
 
 ## Credits
 

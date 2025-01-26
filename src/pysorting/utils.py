@@ -1,4 +1,5 @@
 import time
+from tabulate import tabulate
 
 
 class InvalidElementTypeError(Exception):
@@ -65,7 +66,7 @@ def sorting_time(sorting_function, data):
     return elapsed_time
 
 
-def find_fastest_sorting_function(sorting_functions, data):
+def find_fastest_sorting_function(data, *sorting_functions):
     """
     Finds the fastest sorting function based on execution time.
 
@@ -88,6 +89,13 @@ def find_fastest_sorting_function(sorting_functions, data):
 
     # Find the function with the minimum elapsed time
     fastest_function, fastest_time = min(results, key=lambda x: x[1])
+
+    list_dict = {
+        "Function": [x[0].__name__ for x in results],
+        "Time take": [f"{x[1]:.10f}" for x in results],
+    }
+    print(tabulate(list_dict, headers="keys", tablefmt="fancy_grid"))
+
     return fastest_function, fastest_time
 
 

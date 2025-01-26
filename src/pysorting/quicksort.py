@@ -48,11 +48,13 @@ def quick_sort(arr, ascending=True):
     Examples:
     --------
     Sorting in ascending order (default):
+
     >>> quick_sort([4, 2, 7, 1, 3])
     [1, 2, 3, 4, 7]
 
     Sorting in descending order:
-    >>> quick_sort([4, 2, 7, 1, 3], reverse=True)
+    
+    >>> quick_sort([4, 2, 7, 1, 3], ascending=False)
     [7, 4, 3, 2, 1]
     """
     # Validate input type

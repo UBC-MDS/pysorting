@@ -1,4 +1,4 @@
-# pysorting
+# [pysorting](https://pysorting.readthedocs.io/en/latest/)
 
 ## Overview
 This Python package provides an interactive and educational platform for understanding popular sorting algorithms. Designed for students and educators, it includes implementations of four key sorting algorithms. The package is simple to use and highly customizable, making it an excellent tool for learning and teaching sorting concepts.
@@ -72,7 +72,7 @@ Interested in contributing? Check out the [contributing guidelines](https://gith
 
 ## License
 
-`pysorting` was created by Group 27. It is licensed under the terms of the MIT license.
+`pysorting` was created by Nonso, Marek, Siddarth, Shashank. It is licensed under the terms of the MIT license.
 
 ## Credits
 

@@ -7,8 +7,8 @@
 # -- Project information -----------------------------------------------------
 
 project = u"pysorting"
-copyright = u"2025, Group 27"
-author = u"Group 27"
+copyright = u"2025, Nonso, Marek, Siddarth, Shashank"
+author = u"Nonso, Marek, Siddarth, Shashank"
 
 # -- General configuration ---------------------------------------------------
 

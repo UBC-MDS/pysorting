@@ -1,4 +1,4 @@
-from pysorting import bubble_sort
+from pysorting import bubble_sort, insertion_sort, shell_sort
 from pysorting import find_fastest_sorting_function, sorting_time, is_sorted
 
 
@@ -12,8 +12,8 @@ def test_sorting_time():
 # Test find_fastest_sorting_function
 def test_find_fastest_sorting_function():
     data = [5, 3, 8, 6, 2, 7, 4, 1]
-    sorting_functions = [bubble_sort]
-    fastest_func, fastest_time = find_fastest_sorting_function(sorting_functions, data)
+    sorting_functions = [shell_sort, bubble_sort, insertion_sort]
+    fastest_func, fastest_time = find_fastest_sorting_function(data, *sorting_functions)
 
     assert fastest_func in sorting_functions  # Ensure the fastest function is valid
     assert fastest_time > 0  # Ensure the time taken is positive

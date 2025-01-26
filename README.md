@@ -1,5 +1,7 @@
 # [pysorting](https://pysorting.readthedocs.io/en/latest/)
 
+[![Documentation Status](https://readthedocs.org/projects/pysorting/badge/?version=latest)](https://pysorting.readthedocs.io/en/latest/?badge=latest)
+
 ## Overview
 This Python package provides an interactive and educational platform for understanding popular sorting algorithms. Designed for students and educators, it includes implementations of four key sorting algorithms. The package is simple to use and highly customizable, making it an excellent tool for learning and teaching sorting concepts.
 

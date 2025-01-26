@@ -52,15 +52,14 @@ def shell_sort(arr: list[float], ascending: bool = True) -> list[float]:
     Examples
     --------
     Sorting in ascending order (default):
+
     >>> shell_sort([5, 2, 8, 3, 1])
     [1, 2, 3, 5, 8]
 
     Sorting in descending order:
+
     >>> shell_sort([3.5, 1.2, 2.8, 0.5], ascending=False)
     [3.5, 2.8, 1.2, 0.5]
-
-    >>> shell_sort([1, 2, 3, 4, 5], ascending=True)
-    [1, 2, 3, 4, 5]
     """
     if not isinstance(arr, list):
         raise TypeError("Input must be a list.")

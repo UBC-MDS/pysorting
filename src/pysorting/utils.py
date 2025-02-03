@@ -18,7 +18,7 @@ class NonUniformTypeError(Exception):
     def __init__(self, message="Elements are not of the same type."):
         self.message = message
         super().__init__(self.message)
-    
+
 
 class InvalidAscendingTypeError(Exception):
     """Custom exception raised when 'ascending' is not a boolean."""
@@ -29,12 +29,40 @@ class InvalidAscendingTypeError(Exception):
 
 
 def timer(func):
-    """This function is used as a wrapper to time sorting function. It prints the time
+    """
+    A decorator function that measures and prints the execution time of a given function.
 
-    Parameters
+    This decorator records the start and end time of the function execution, calculates the elapsed time,
+    and prints the time taken in seconds. The result of the wrapped function along with the execution time
+    is returned.
+
+    Parameters:
     ----------
-    func : _type_
-        _description_
+    func : function
+        The function whose execution time is to be measured.
+
+    Returns:
+    -------
+    function
+        A wrapper function that executes the given function and measures its execution time.
+
+    Notes:
+    -----
+    - The execution time is measured using the `time` module.
+    - The function returns both the result of the original function and the time taken for execution.
+    - This decorator can be used to evaluate the performance of sorting algorithms and other time-sensitive functions.
+
+    Examples:
+    --------
+    Using the `timer` decorator on a sorting function:
+
+    >>> @timer
+    ... def sample_sort(arr):
+    ...     return sorted(arr)
+
+    >>> sample_sort([5, 2, 8, 1, 3])
+    Function 'sample_sort' executed in 0.000002 seconds.
+    ([1, 2, 3, 5, 8], 2e-06)
     """
 
     def wrapper(*args, **kwargs):
@@ -50,14 +78,39 @@ def timer(func):
 
 def sorting_time(sorting_function, data):
     """
-    Returns the time taken to sort a function.
+    Measures the execution time of a given sorting function.
+
+    This function wraps the specified sorting function using the `timer` decorator
+    to measure how long it takes to sort the provided dataset.
 
     Parameters:
-    - sorting_function: Sorting function to output the time taken to sort.
-    - test_data: List to sort (same data will be passed to all functions).
+    ----------
+    sorting_function : function
+        The sorting function whose execution time needs to be measured. It should accept a list as input
+        and return a sorted list.
+    data : list
+        The list of values to be sorted. A copy of this list is passed to the sorting function
+        to prevent modification of the original data.
 
     Returns:
-    - A tuple (fastest_function, fastest_time).
+    -------
+    float
+        The execution time (in seconds) of the sorting function.
+
+    Notes:
+    -----
+    - The function uses the `timer` decorator to record execution time.
+    - A copy of the input data is passed to the sorting function to avoid side effects.
+    - Useful for benchmarking different sorting algorithms.
+
+    Examples:
+    --------
+    Measuring the execution time of a sorting function:
+
+    >>> test_data = [5, 2, 8, 1, 3]
+    >>> sorting_time(quick_sort, test_data)
+    Function 'quick_sort' executed in 0.000002 seconds.
+    0.0000024567
     """
     wrapped_func = timer(sorting_function)
 
@@ -68,14 +121,47 @@ def sorting_time(sorting_function, data):
 
 def find_fastest_sorting_function(data, *sorting_functions):
     """
-    Finds the fastest sorting function based on execution time.
+    Determines the fastest sorting function by measuring execution time.
+
+    This function tests multiple sorting functions on the same dataset, measures their execution times,
+    and identifies the fastest one. The execution times for all sorting functions are displayed in a formatted table.
 
     Parameters:
-    - sorting_functions: List of sorting functions to compare.
-    - test_data: List to sort (same data will be passed to all functions).
+    ----------
+    data : list
+        The list of values to be sorted. A copy of this list is passed to each sorting function
+        to ensure that the original data remains unmodified.
+    sorting_functions : tuple of functions
+        A variable number of sorting functions to be tested. Each function should accept a list as input
+        and return a sorted list.
 
     Returns:
-    - A tuple (fastest_function, fastest_time).
+    -------
+    tuple
+        A tuple containing:
+        - `fastest_function` (function): The sorting function with the shortest execution time.
+        - `fastest_time` (float): The execution time (in seconds) of the fastest function.
+
+    Notes:
+    -----
+    - Each sorting function is wrapped using the `timer` decorator to measure execution time.
+    - The execution times of all tested functions are displayed in a table format using `tabulate`.
+    - The function automatically selects the sorting function with the minimum execution time.
+
+    Examples:
+    --------
+    Comparing multiple sorting functions:
+
+    >>> test_data = [5, 2, 8, 1, 3]
+    >>> fastest_function, fastest_time = find_fastest_sorting_function(test_data, bubble_sort, quick_sort)
+    ┏━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┓
+    ┃ Function      ┃ Time taken (s)  ┃
+    ┡━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━┩
+    ├ bubble_sort   │ 0.0000253456    │
+    ├ quick_sort    │ 0.0000024567    │
+    └───────────────┴────────────────┘
+    >>> print(f"The fastest function is {fastest_function.__name__} with a time of {fastest_time:.6f} seconds.")
+    The fastest function is quick_sort with a time of 0.000002 seconds.
     """
     results = []
 
@@ -101,14 +187,50 @@ def find_fastest_sorting_function(data, *sorting_functions):
 
 def is_sorted(lst, ascending=True):
     """
-    Checks if a list is sorted in ascending or descending order.
+    Determines whether a list is sorted in ascending or descending order.
+
+    This function checks if the elements in the list are in non-decreasing (ascending)
+    or non-increasing (descending) order, based on the `ascending` parameter.
 
     Parameters:
-    - lst (list): The list to check.
-    - ascending (bool): If True, checks for ascending order; otherwise, descending.
+    ----------
+    lst : list
+        The list of elements to check. The function assumes the elements are comparable.
+    ascending : bool, optional
+        If `True` (default), checks whether the list is sorted in ascending order.
+        If `False`, checks whether the list is sorted in descending order.
 
     Returns:
-    - bool: True if the list is sorted in the specified order, False otherwise.
+    -------
+    bool
+        `True` if the list is sorted in the specified order, `False` otherwise.
+
+    Raises:
+    ------
+    TypeError
+        If the list contains elements that cannot be compared.
+
+    Notes:
+    -----
+    - An empty list or a list with a single element is considered sorted.
+    - The function performs a pairwise comparison to verify sorting order.
+
+    Examples:
+    --------
+    Checking if a list is sorted in ascending order (default):
+
+    >>> is_sorted([1, 2, 3, 4, 5])
+    True
+
+    Checking if a list is sorted in descending order:
+
+    >>> is_sorted([5, 4, 3, 2, 1], ascending=False)
+    True
+
+    Checking an unsorted list:
+
+    >>> is_sorted([1, 3, 2, 4, 5])
+    False
     """
     if ascending:
         return all(lst[i] <= lst[i + 1] for i in range(len(lst) - 1))
@@ -118,14 +240,55 @@ def is_sorted(lst, ascending=True):
 
 def validate_list_elements(elements):
     """
-    Validates if all elements in a list are either all numerical (int or float)
+    Validates whether all elements in a list are of the same type: either all numerical (int or float)
     or all strings.
 
+    This function checks if a given list contains only numeric values (`int` or `float`)
+    or only string values. If the list contains mixed data types, it is considered invalid.
+
     Parameters:
-    - elements (list): List of elements to validate.
+    ----------
+    elements : list
+        The list of elements to validate.
 
     Returns:
-    - bool: True if the list is valid, False otherwise.
+    -------
+    bool
+        `True` if all elements in the list are either numerical (integers or floats) or all strings.
+        `False` if the list contains mixed data types.
+
+    Raises:
+    ------
+    TypeError
+        If the input is not a list.
+
+    Notes:
+    -----
+    - An empty list is considered valid.
+    - The function does not check for `None` values explicitly.
+    - Useful for data validation in sorting, filtering, or numerical operations.
+
+    Examples:
+    --------
+    Checking a valid list with numbers:
+
+    >>> validate_list_elements([1, 2, 3, 4.5])
+    True
+
+    Checking a valid list with strings:
+
+    >>> validate_list_elements(["apple", "banana", "cherry"])
+    True
+
+    Checking an invalid list with mixed types:
+
+    >>> validate_list_elements([1, "banana", 3.5])
+    False
+
+    Checking an empty list:
+
+    >>> validate_list_elements([])
+    True
     """
     if all(isinstance(e, (int, float)) for e in elements):
         return True  # All elements are numerical

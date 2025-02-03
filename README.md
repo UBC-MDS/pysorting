@@ -15,6 +15,8 @@ This Python package provides an interactive and educational platform for underst
 
 # Features
 
+The package was created with the goal to be a tool for aspiring computer and data scientists to use in order to better understand the steps, similiraities and differences of various sorting functions. Below is the list of functions contained in the package
+
 - `bubble_sort`:
   -This function takes in a list of numbers provided by the user and sorts it following a bubble-sort algorithm. A simple, comparison-based sorting algorithm that repeatedly swaps adjacent elements if they are in the wrong order.
 - `insertion_sort`:
@@ -47,8 +49,6 @@ A convenient helper function is included to verify if a list is sorted. It takes
 This utility is handy for debugging and ensuring the correctness of sorting implementations.
 
 ---
-
-The package was created with the goal to be a tool for aspiring computer and data scientists to use in order to better understand the steps, similiraities and differences of various sorting functions. With the current functions included, a user can easily pass an array and implement a sorting function of his choosing to return the sorted array. Further developments for this package will include a function to generate a random list of desired size for sorting, one function to compute the big-o complexity of a given sorting algortithm, and a visualization of the sorting process for a chosen algorithm.
 
 ## `pysorting` in the Python Ecosystem
 

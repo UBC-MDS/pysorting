@@ -19,6 +19,14 @@ myst-nb = "^1.1.2"
 sphinx-autoapi = "^3.4.0"
 sphinx-rtd-theme = "^3.0.2"
 
+[tool.semantic_release]
+version_toml = [
+    "pyproject.toml:tool.poetry.version",
+]                                                    # version location
+branch = "main"                                      # branch to make releases of
+changelog_file = "CHANGELOG.md"                      # changelog file
+build_command = "pip install poetry && poetry build" # build dists 
+
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"

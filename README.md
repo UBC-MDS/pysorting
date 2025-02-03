@@ -63,9 +63,9 @@ pip install pysorting
 
 ## Usage
 
-The following examples illustrate how the sorting functions in this package are intended to be used. Please note that the functions are currently not implemented—only their docstrings are in place for now.
+The following examples illustrate how the sorting functions in this package are intended to be used.
 
-After installing the package, you can import the functions (once implemented) as follows:
+After installing the package, you can import the functions as follows:
 
 ```python
 from pysorting import quick_sort, bubble_sort, shell_sort, insertion_sort

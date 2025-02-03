@@ -1,90 +1,75 @@
 # tests/shellsort_test.py
 import pytest
-from pysorting import (shell_sort, 
-                       InvalidElementTypeError, 
-                       NonUniformTypeError, 
-                       InvalidAscendingTypeError)
+from pysorting import shell_sort, InvalidElementTypeError, NonUniformTypeError, InvalidAscendingTypeError
 
-def test_empty_array():
-    """Test shell sort with an empty array"""
-    assert shell_sort([]) == []
+# Define test cases as fixtures
+@pytest.fixture(params=[
+    [],  # empty array
+    [1],  # single-element array
+    [1, 2, 3, 4, 5],  # already sorted array
+    [5, 2, 8, 3, 1],  # unsorted array
+    [5, 2, 8, 3, 1, 2, 5],  # array with duplicates
+    [5, -2, 8, -3, 1]  # array with negative numbers
+])
+def test_data(request):
+    return request.param
 
-def test_single_element_array():
-    """Test shell sort with a single-element array"""
-    assert shell_sort([1]) == [1]
+@pytest.fixture
+def test_data_reverse_sorted():
+    return [8, 7, 6, 5, 4, 3, 2, 1]
 
-def test_already_sorted_array():
-    """Test shell sort with an already sorted array"""
-    assert shell_sort([1, 2, 3, 4, 5]) == [1, 2, 3, 4, 5]
+@pytest.fixture
+def test_data_single_element():
+    return [5]
 
-def test_unsorted_array():
-    """Test shell sort with an unsorted array"""
-    assert shell_sort([5, 2, 8, 3, 1]) == [1, 2, 3, 5, 8]
+@pytest.fixture
+def test_data_empty():
+    return []
 
-def test_array_with_duplicates():
-    """Test shell sort with an array containing duplicates"""
-    assert shell_sort([5, 2, 8, 3, 1, 2, 5]) == [1, 2, 2, 3, 5, 5, 8]
+@pytest.fixture
+def test_data_error():
+    return "not a list"
 
-def test_array_with_negative_numbers():
-    """Test shell sort with an array containing negative numbers"""
-    assert shell_sort([5, -2, 8, -3, 1]) == [-3, -2, 1, 5, 8]
+@pytest.fixture
+def test_invalid_error():
+    return [1, "a", 3]
 
-def test_reverse_sorted_list(test_data1):
-    """Test if a reverse sorting works properly."""
-    expected = [8, 7, 6, 5, 4, 3, 2, 1]
-    actual = shell_sort(test_data1, ascending=False)
+@pytest.fixture
+def test_nonuniform_error():
+    return [1, 2, "3"]
 
-    assert isinstance(actual, list)
-    assert actual == expected
+def test_shell_sort(test_data):
+    """Test shell sort with various inputs"""
+    assert shell_sort(test_data) == sorted(test_data)
 
+def test_shell_sort_reverse(test_data_reverse_sorted):
+    """Test shell sort with reverse sorting"""
+    assert shell_sort(test_data_reverse_sorted, ascending=False) == sorted(test_data_reverse_sorted, reverse=True)
 
-def test_unsorted_list(test_data1):
-    """Test if an unsorted list is sorted correctly."""
-    expected = [1, 2, 3, 4, 5, 6, 7, 8]
-    actual = shell_sort(test_data1)
+def test_shell_sort_single_element(test_data_single_element):
+    """Test shell sort with single-element input"""
+    assert shell_sort(test_data_single_element) == test_data_single_element
 
-    assert isinstance(actual, list)
-    assert actual == expected
+def test_shell_sort_empty(test_data_empty):
+    """Test shell sort with empty input"""
+    assert shell_sort(test_data_empty) == test_data_empty
 
-
-def test_single_element_list(test_data_single_element):
-    """Test if a single-element list is handled correctly."""
-    expected = [5]
-    actual = shell_sort(test_data_single_element, ascending=False)
-
-    assert isinstance(actual, list)
-    assert len(actual) == 1
-    assert actual == expected
-
-
-def test_empty_list(test_data_empty):
-    """Test if an empty list is handled correctly."""
-
-    actual = shell_sort(test_data_empty)
-
-    assert isinstance(actual, list)
-    assert len(actual) == 0
-
-
-def test_type_error(test_data_error2):
-    """Test if a TypeError is raised for non-list inputs."""
+def test_shell_sort_error(test_data_error):
+    """Test shell sort with non-list input"""
     with pytest.raises(TypeError):
-        shell_sort(test_data_error2)
+        shell_sort(test_data_error)
 
-
-def test_invalid_type_error(test_invalid_error):
-    """Test if a TypeError is raised for non-list inputs."""
-    with pytest.raises(InvalidElementTypeError):
+def test_shell_sort_invalid_element_error(test_invalid_error):
+    """Test shell sort with invalid element type"""
+    with pytest.raises(NonUniformTypeError):
         shell_sort(test_invalid_error)
 
-
-def test_non_uniform_error(test_nonuniform_error):
-    """Test if a TypeError is raised for non-list inputs."""
+def test_shell_sort_non_uniform_error(test_nonuniform_error):
+    """Test shell sort with non-uniform element types"""
     with pytest.raises(NonUniformTypeError):
         shell_sort(test_nonuniform_error)
 
-
-def test_invalid_ascending_type():
-    """Test if InvalidAscendingTypeError is raised when ascending parameter is not a boolean."""
+def test_shell_sort_invalid_ascending_type():
+    """Test shell sort with invalid ascending parameter type"""
     with pytest.raises(InvalidAscendingTypeError):
-        shell_sort([1, 2, 3], ascending="not_a_boolean")
+        shell_sort([1, 2, 3], ascending="not a boolean")

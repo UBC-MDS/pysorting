@@ -2,7 +2,7 @@
 import pytest
 from pysorting import shell_sort, InvalidElementTypeError, NonUniformTypeError, InvalidAscendingTypeError
 
-# Define test cases as fixtures
+# Define test cases as fixtures--
 @pytest.fixture(params=[
     [],  # empty array
     [1],  # single-element array

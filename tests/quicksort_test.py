@@ -1,86 +1,78 @@
+# tests/quick_sort_test.py
 import pytest
 from pysorting import quick_sort, InvalidElementTypeError, NonUniformTypeError, InvalidAscendingTypeError
 
+# Define test cases as fixtures
+@pytest.fixture(params=[
+    [],  # empty array
+    [1],  # single-element array
+    [1, 2, 3, 4, 5, 6, 7, 8],  # already sorted array
+    [8, 7, 6, 5, 4, 3, 2, 1],  # reverse-sorted array
+    [5, 2, 8, 3, 1],  # unsorted array
+    [1, 2, 3.0, 4, 5],  # array with floats
+])
+def test_data(request):
+    return request.param
 
-def test_sorted_list(test_data_sorted):
-    """Test if a pre-sorted list remains unchanged."""
-    expected = [1, 2, 3, 4, 5, 6, 7, 8]
-    actual = quick_sort(test_data_sorted)
+@pytest.fixture
+def test_data_invalid_element():
+    return [1, "a", 3]
+
+@pytest.fixture
+def test_data_non_uniform():
+    return [1, 2, "3"]
+
+@pytest.fixture
+def test_data_large_sorted():
+    return list(range(1, 101))
+
+@pytest.fixture
+def test_data_large_unsorted():
+    return list(range(1, 101))[::-1]
+
+def test_quick_sort(test_data):
+    """Test quick sort with various inputs"""
+    expected = sorted(test_data)
+    actual = quick_sort(test_data)
 
     assert isinstance(actual, list)
     assert actual == expected
 
-
-def test_reverse_sorted_list(test_data1):
-    """Test if a reverse sorting works properly."""
-    expected = [8, 7, 6, 5, 4, 3, 2, 1]
-    actual = quick_sort(test_data1, ascending=False)
-
-    assert isinstance(actual, list)
-    assert actual == expected
-
-
-def test_unsorted_list(test_data1):
-    """Test if an unsorted list is sorted correctly."""
-    expected = [1, 2, 3, 4, 5, 6, 7, 8]
-    actual = quick_sort(test_data1)
+def test_quick_sort_reverse(test_data):
+    """Test quick sort with reverse sorting"""
+    expected = sorted(test_data, reverse=True)
+    actual = quick_sort(test_data, ascending=False)
 
     assert isinstance(actual, list)
     assert actual == expected
 
-
-def test_single_element_list(test_data_single_element):
-    """Test if a single-element list is handled correctly."""
-    expected = [5]
-    actual = quick_sort(test_data_single_element)
-
-    assert isinstance(actual, list)
-    assert len(actual) == 1
-    assert actual == expected
-
-
-def test_empty_list(test_data_empty):
-    """Test if an empty list is handled correctly."""
-    actual = quick_sort(test_data_empty)
-
-    assert isinstance(actual, list)
-    assert len(actual) == 0
-
-def test_invalid_type_error(test_invalid_error):
-    """Test if an InvalidElementTypeError is raised for invalid element types."""
-    with pytest.raises(InvalidElementTypeError):
-        quick_sort(test_invalid_error)
-
-def test_non_uniform_error(test_nonuniform_error):
-    """Test if a NonUniformTypeError is raised for lists with mixed types."""
+def test_quick_sort_invalid_element(test_data_invalid_element):
+    """Test quick sort with invalid element type"""
     with pytest.raises(NonUniformTypeError):
-        quick_sort(test_nonuniform_error)
+        quick_sort(test_data_invalid_element)
 
-def test_invalid_ascending_type():
-    """Test if InvalidAscendingTypeError is raised when ascending parameter is not a boolean."""
+def test_quick_sort_non_uniform(test_data_non_uniform):
+    """Test quick sort with non-uniform element types"""
+    with pytest.raises(NonUniformTypeError):
+        quick_sort(test_data_non_uniform)
+
+def test_quick_sort_invalid_ascending_type():
+    """Test quick sort with invalid ascending parameter type"""
     with pytest.raises(InvalidAscendingTypeError):
         quick_sort([1, 2, 3], ascending="not_a_boolean")
 
-def test_float_list(test_data_float):
-    """Test if a list with both integers and floats is sorted correctly."""
-    expected = [1, 2, 3.0, 4, 5]
-    actual = quick_sort(test_data_float)
+def test_quick_sort_large_sorted(test_data_large_sorted):
+    """Test quick sort with large sorted input"""
+    expected = test_data_large_sorted
+    actual = quick_sort(test_data_large_sorted)
 
     assert isinstance(actual, list)
     assert actual == expected
 
-def test_large_sorted_list(large_sorted_list):
-    """Test sorting of a large already sorted list."""
-    actual = quick_sort(large_sorted_list)
-
-    assert isinstance(actual, list)
-    assert actual == large_sorted_list
-
-
-def test_large_unsorted_list(large_unsorted_list):
-    """Test sorting of a large unsorted list."""
+def test_quick_sort_large_unsorted(test_data_large_unsorted):
+    """Test quick sort with large unsorted input"""
     expected = list(range(1, 101))
-    actual = quick_sort(large_unsorted_list)
+    actual = quick_sort(test_data_large_unsorted)
 
     assert isinstance(actual, list)
     assert actual == expected

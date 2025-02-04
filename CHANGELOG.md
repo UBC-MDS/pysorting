@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.0.4 (2025-02-04)
+
+### Bug Fixes
+
+- Refactorting tests
+  ([`b1bf4d5`](https://github.com/UBC-MDS/pysorting/commit/b1bf4d5a3a40c726e3ff834153fb813ddfa83d2a))
+
+
 ## v0.0.3 (2025-02-04)
 
 ### Bug Fixes

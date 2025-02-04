@@ -73,7 +73,15 @@ from pysorting import quick_sort, bubble_sort, shell_sort, insertion_sort
 bubble_sort([4, 2, 7, 1, 3], ascending = False)
 ```
 
-For more examples on usage of the different functions,you can check out this [Example NoteBook](https://pysorting.readthedocs.io/en/latest/example.html)
+For more examples on usage of the different functions, you can check out this [Example NoteBook](https://pysorting.readthedocs.io/en/latest/example.html)
+
+## Running Tests
+
+To run tests and check code coverage, use the following command in the project root:
+
+```bash
+poetry run pytest --cov=pysorting
+```
 
 ## Contributing
 

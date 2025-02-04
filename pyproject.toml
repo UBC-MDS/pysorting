@@ -2,7 +2,7 @@
 name = "pysorting"
 version = "0.0.4"
 description = "a package to aid user in implementing various sorting algorithms"
-authors = ["Group 27"]
+authors = ["Chukwunonso Ebele-muolokwu", "Marek Boulerice", "Shashank Hosahalli Shivamurthy", "Siddarth Subrahmanian"]
 license = "MIT"
 readme = "README.md"
 

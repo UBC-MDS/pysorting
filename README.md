@@ -15,6 +15,8 @@ This Python package provides an interactive and educational platform for underst
 
 # Features
 
+The package was created with the goal to be a tool for aspiring computer and data scientists to use in order to better understand the steps, similiraities and differences of various sorting functions. Below is the list of functions contained in the package
+
 - `bubble_sort`:
   -This function takes in a list of numbers provided by the user and sorts it following a bubble-sort algorithm. A simple, comparison-based sorting algorithm that repeatedly swaps adjacent elements if they are in the wrong order.
 - `insertion_sort`:
@@ -48,8 +50,6 @@ This utility is handy for debugging and ensuring the correctness of sorting impl
 
 ---
 
-The package was created with the goal to be a tool for aspiring computer and data scientists to use in order to better understand the steps, similiraities and differences of various sorting functions. With the current functions included, a user can easily pass an array and implement a sorting function of his choosing to return the sorted array. Further developments for this package will include a function to generate a random list of desired size for sorting, one function to compute the big-o complexity of a given sorting algortithm, and a visualization of the sorting process for a chosen algorithm.
-
 ## `pysorting` in the Python Ecosystem
 
 There are many presences of similar sorting functions within the python ecosystem. For one, python itself already has a built in [`.sort()` function](https://docs.python.org/3/library/stdtypes.html#list.sort). There is also a [`sorted()` built-in function](https://docs.python.org/3/library/functions.html#sorted) that builds a new sorted list from an iterable.Additionally, several packages have also been created with similar goal of implementing various sorting algortithms. One example project is shown here: [https://pypi.org/project/sort-algorithms/](https://github.com/DahlitzFlorian/SortingAlgorithms)
@@ -63,9 +63,9 @@ pip install pysorting
 
 ## Usage
 
-The following examples illustrate how the sorting functions in this package are intended to be used. Please note that the functions are currently not implemented—only their docstrings are in place for now.
+The following examples illustrate how the sorting functions in this package are intended to be used.
 
-After installing the package, you can import the functions (once implemented) as follows:
+After installing the package, you can import the functions as follows:
 
 ```python
 from pysorting import quick_sort, bubble_sort, shell_sort, insertion_sort

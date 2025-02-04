@@ -1,6 +1,18 @@
 # CHANGELOG
 
 
+## v0.0.3 (2025-02-04)
+
+### Bug Fixes
+
+- Further changes to README Usage section
+  ([`9b205ae`](https://github.com/UBC-MDS/pysorting/commit/9b205ae9a2b7c0b59604a2bd15e36c09acf3b3eb))
+
+- Marek updated README usage section so no longer includes -please note that the functions are
+  currently not implemented-
+  ([`80263ac`](https://github.com/UBC-MDS/pysorting/commit/80263ac850689eff3021cbc64b00204c161d20b8))
+
+
 ## v0.0.2 (2025-02-03)
 
 ### Bug Fixes

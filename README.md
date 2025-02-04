@@ -75,6 +75,14 @@ bubble_sort([4, 2, 7, 1, 3], ascending = False)
 
 For more examples on usage of the different functions,you can check out this [Example NoteBook](https://pysorting.readthedocs.io/en/latest/example.html)
 
+## Running Tests
+
+To run tests and check code coverage, use the following command in the project root:
+
+```bash
+poetry run pytest --cov=pysorting
+```
+
 ## Contributing
 
 Interested in contributing? Check out the [contributing guidelines](https://github.com/UBC-MDS/pysorting/blob/main/CONTRIBUTING.md). Please note that this project is released with a Code of Conduct. By contributing to this project, you agree to abide by its terms.
